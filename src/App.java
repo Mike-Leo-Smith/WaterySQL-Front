@@ -8,7 +8,9 @@ public class App {
     private JButton runButton;
     private JTextPane editor;
     
+    App() {
     
+    }
     
     public static void main(String[] args) {
         var frame = new JFrame("Hello");
