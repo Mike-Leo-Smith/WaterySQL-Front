@@ -1,22 +1,20 @@
 import java.awt.event.*
-import java.io.File
 import java.nio.file.Paths
 import javax.swing.*
 import kotlin.concurrent.thread
 
 class Controller {
 
-    val view = View()
-    val basePath = Paths.get("watery-db").toAbsolutePath().toFile()
+    private val view = View()
+    private val basePathFile = Paths.get("watery-db").toAbsolutePath().toFile()
+    private val resultFile = Paths.get("watery-db/result.html").toAbsolutePath().toFile()
 
     init {
 
         EngineJNI.initialize()
 
         updateFileTree()
-
         view.runButton.addActionListener { executeCommand() }
-
         view.editorPane
                 .getInputMap(JComponent.WHEN_FOCUSED)
                 .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK, true), "run")
@@ -44,27 +42,29 @@ class Controller {
         view.runButton.isEnabled = false
         view.editorPane.isEnabled = false
         view.resultPane.text = "Working..."
+        resultFile.delete()
+
         thread {
             EngineJNI.execute(view.editorPane.text)
-            view.resultPane.text = "Done."
-            File("result.html").takeIf { file ->
-                file.exists()
-            }?.run {
-                view.resultPane.text = bufferedReader().readText()
-                delete()
+            SwingUtilities.invokeAndWait {
+                view.resultPane.text = "Done."
+                resultFile.takeIf { file -> file.exists() }?.apply {
+                    view.resultPane.text = bufferedReader().readText()
+                    delete()
+                }
+                view.editorPane.isEnabled = true
+                view.runButton.isEnabled = true
+                updateFileTree()
             }
-            view.editorPane.isEnabled = true
-            view.runButton.isEnabled = true
-
-            updateFileTree()
         }
     }
 
     private fun updateFileTree() {
-        view.databaseRoot.refresh(basePath)
+        view.databaseRoot.refresh(basePathFile)
         var i = 0
         while (i < view.fileTree.rowCount) {
             view.fileTree.expandRow(i++)
+            view.fileTree.updateUI()
         }
     }
 
