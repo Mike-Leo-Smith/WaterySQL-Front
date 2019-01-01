@@ -79,8 +79,9 @@
                       <contentType value="text/html"/>
                       <doubleBuffered value="true"/>
                       <editable value="false"/>
+                      <font name="American Typewriter"/>
                       <margin top="10" left="10" bottom="10" right="10"/>
-                      <text value="&lt;html&gt;&#10;  &lt;head&gt;&#10;    &#10;  &lt;/head&gt;&#10;  &lt;body&gt;&#10;    &lt;h1&gt;&#10;      Hello! Welcome to WaterySQL Front.&#10;    &lt;/h1&gt;&#10;  &lt;/body&gt;&#10;&lt;/html&gt;&#10;"/>
+                      <text value="&lt;html&gt;&#10;  &lt;head&gt;&#10;    &lt;style type=&quot;text/css&quot;&gt;&#10;      &lt;!--&#10;        html { font-family: Courier New, Courier, monospace }&#10;      --&gt;&#10;    &lt;/style&gt;&#10;    &#10;  &lt;/head&gt;&#10;  &lt;body&gt;&#10;    &lt;h1 style=&quot;font-variant: normal; line-height: normal&quot;&gt;&#10;      Hello! Welcome to WaterySQL Front.&#10;    &lt;/h1&gt;&#10;  &lt;/body&gt;&#10;&lt;/html&gt;&#10;"/>
                     </properties>
                   </component>
                 </children>
@@ -96,7 +97,7 @@
                   <autoscrolls value="true"/>
                 </properties>
                 <border type="empty">
-                  <size top="0" left="0" bottom="0" right="0"/>
+                  <size top="5" left="0" bottom="0" right="0"/>
                 </border>
                 <children>
                   <scrollpane id="87544">
@@ -131,7 +132,7 @@
                     </constraints>
                     <properties/>
                     <border type="empty">
-                      <size top="5" left="0" bottom="0" right="7"/>
+                      <size top="0" left="0" bottom="0" right="7"/>
                     </border>
                     <children>
                       <component id="deae1" class="javax.swing.JButton" binding="runButton" default-binding="true">
@@ -160,6 +161,20 @@
                       </component>
                     </children>
                   </grid>
+                  <component id="86035" class="javax.swing.JLabel" binding="currentDatabaseLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="2" indent="1" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <autoscrolls value="true"/>
+                      <doubleBuffered value="true"/>
+                      <font name="Monaco"/>
+                      <text value="NO DATABASE CURRENTLY IN USE"/>
+                      <toolTipText value="Current Database"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="0"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
             </children>

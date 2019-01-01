@@ -1,4 +1,5 @@
 import java.awt.event.*
+import java.io.File
 import java.nio.file.Paths
 import javax.swing.*
 import kotlin.concurrent.thread
@@ -8,6 +9,9 @@ class Controller {
     private val view = View()
     private val basePathFile = Paths.get("watery-db").toAbsolutePath().toFile()
     private val resultFile = Paths.get("watery-db/result.html").toAbsolutePath().toFile()
+
+    private val htmlHeader = "<html><head><style type='text/css'>${File("res/style.css").readText()}</style></head><body>"
+    private val htmlTail = "</body></html>"
 
     init {
 
@@ -24,6 +28,8 @@ class Controller {
                 executeCommand()
             }
         })
+
+        view.resultPane.text = "$htmlHeader<h2>Welcome to WaterySQL Front!</h2>$htmlTail"
 
         JFrame("WaterySQL").run {
             contentPane = view.contentPane
@@ -46,14 +52,19 @@ class Controller {
 
         thread {
             EngineJNI.execute(view.editorPane.text)
+            view.resultPane.text = "Rendering..."
+            view.resultPane.text = if (resultFile.exists())
+                "$htmlHeader${resultFile.bufferedReader().readText()}$htmlTail" else
+                "Done."
+            resultFile.delete()
+            view.editorPane.isEnabled = true
+            view.runButton.isEnabled = true
+            EngineJNI.getCurrentDatabaseName().let { curr ->
+                view.currentDatabaseLabel.text = if (curr.isNotEmpty())
+                    "CURRENT DATABASE: $curr" else
+                    "NO DATABASE CURRENTLY IN USE"
+            }
             SwingUtilities.invokeAndWait {
-                view.resultPane.text = "Done."
-                resultFile.takeIf { file -> file.exists() }?.apply {
-                    view.resultPane.text = bufferedReader().readText()
-                    delete()
-                }
-                view.editorPane.isEnabled = true
-                view.runButton.isEnabled = true
                 updateFileTree()
             }
         }
@@ -61,10 +72,12 @@ class Controller {
 
     private fun updateFileTree() {
         view.databaseRoot.refresh(basePathFile)
-        var i = 0
-        while (i < view.fileTree.rowCount) {
-            view.fileTree.expandRow(i++)
-            view.fileTree.updateUI()
+        view.fileTree.run {
+            var i = 0
+            while (i < rowCount) {
+                expandRow(i++)
+                updateUI()
+            }
         }
     }
 

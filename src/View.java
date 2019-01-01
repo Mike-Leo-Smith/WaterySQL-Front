@@ -8,6 +8,7 @@ public class View {
     JButton runButton;
     JTextPane editorPane;
     JTextPane resultPane;
+    JLabel currentDatabaseLabel;
     DefaultMutableTreeNode databaseRoot;
     
     private void createUIComponents() {
