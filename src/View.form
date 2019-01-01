@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="App">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View">
   <grid id="27dc6" binding="contentPane" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="647" height="554"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -34,10 +34,10 @@
               <horizontalScrollBarPolicy value="31"/>
             </properties>
             <border type="empty">
-              <size top="5" left="7" bottom="5" right="0"/>
+              <size top="7" left="10" bottom="0" right="0"/>
             </border>
             <children>
-              <component id="df0cd" class="javax.swing.JTree" binding="fileTree">
+              <component id="df0cd" class="javax.swing.JTree" binding="fileTree" custom-create="true">
                 <constraints/>
                 <properties>
                   <autoscrolls value="true"/>
@@ -53,7 +53,7 @@
             <properties>
               <autoscrolls value="false"/>
               <continuousLayout value="true"/>
-              <dividerLocation value="393"/>
+              <dividerLocation value="357"/>
               <dividerSize value="3"/>
               <doubleBuffered value="true"/>
               <orientation value="0"/>
@@ -70,14 +70,17 @@
                   <doubleBuffered value="true"/>
                 </properties>
                 <border type="empty">
-                  <size top="7" left="7" bottom="7" right="7"/>
+                  <size top="0" left="0" bottom="0" right="0"/>
                 </border>
                 <children>
-                  <component id="19857" class="javax.swing.JTable" binding="resultTable">
+                  <component id="f6a4" class="javax.swing.JTextPane" binding="resultPane">
                     <constraints/>
                     <properties>
+                      <contentType value="text/html"/>
                       <doubleBuffered value="true"/>
-                      <enabled value="true"/>
+                      <editable value="false"/>
+                      <margin top="10" left="10" bottom="10" right="10"/>
+                      <text value="&lt;html&gt;&#10;  &lt;head&gt;&#10;    &#10;  &lt;/head&gt;&#10;  &lt;body&gt;&#10;    &lt;h1&gt;&#10;      Hello! Welcome to WaterySQL Front.&#10;    &lt;/h1&gt;&#10;  &lt;/body&gt;&#10;&lt;/html&gt;&#10;"/>
                     </properties>
                   </component>
                 </children>
@@ -106,7 +109,7 @@
                     </properties>
                     <border type="empty"/>
                     <children>
-                      <component id="dc6a3" class="javax.swing.JTextPane" binding="editor">
+                      <component id="dc6a3" class="javax.swing.JTextPane" binding="editorPane">
                         <constraints/>
                         <properties>
                           <doubleBuffered value="true"/>
@@ -151,6 +154,7 @@
                           <horizontalTextPosition value="0"/>
                           <margin top="0" left="0" bottom="0" right="0"/>
                           <text value="▶"/>
+                          <toolTipText value="Run"/>
                           <verticalAlignment value="0"/>
                         </properties>
                       </component>
