@@ -56,7 +56,6 @@ class Controller {
             view.resultPane.text = if (resultFile.exists())
                 "$htmlHeader${resultFile.bufferedReader().readText()}$htmlTail" else
                 "Done."
-            resultFile.delete()
             view.editorPane.isEnabled = true
             view.runButton.isEnabled = true
             EngineJNI.getCurrentDatabaseName().let { curr ->
